@@ -49,5 +49,30 @@
   nums4.unshift(newnum, 1, 2)
 
   console.log(nums4)
+
+  /*
+  * removing element 
+  * */
+  // from the beginning of an array with pop()
+  let nums5 = [9, 1, 2, 3, 4, 5]
+
+  nums5.pop()
+
+  console.log('nums5:', nums5)
+
+  // at the end of the array using shift()
+  let nums6 = [6, 1, 2, 3, 4, 5]
+
+  nums6.shift()
+  console.log('nums6', nums6)
+
+  nums6.unshift(6)
+  console.log('nums6', nums6)
+
+  let first = nums6.shift()
+
+  nums6.push(first)
+  console.log('nums6', nums6)
+
 })()
 
