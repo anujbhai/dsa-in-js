@@ -1,116 +1,140 @@
 const fs = require('fs')
 
-class List {
-  constructor() {
-    this.listSize = 0
-    this.pos = 0
-    this.dataStore = []
-  }
-
-  // find an element
-  find(element) {
-    for (let i = 0; i < this.dataStore.length; ++i) {
-      if (this.dataStore[i] == element) {
-        return i
-      }
+function List() {
+  this.listSize = 0
+  this.pos = 0
+  this.dataStore = []
+  this.clear = clear
+  this.find = find
+  this.toString = toString
+  this.insert = insert
+  this.append = append
+  this.remove = remove
+  this.front = front
+  this.end = end
+  this.prev = prev
+  this.next = next
+  this.length = length
+  this.currPos = currPos
+  this.moveTo = moveTo
+  this.getElement = getElement
+  this.length = length
+  this.contains = contains
+}
+// find an element
+function find(element) {
+  for (let i = 0; i < this.dataStore.length; ++i) {
+    if (this.dataStore[i] == element) {
+      return i
     }
-
-    return -1
   }
 
-  // adding an element
-  append(element) {
-    this.dataStore[this.listSize++] = element
+  return -1
+}
+
+// adding an element
+function append(element) {
+  this.dataStore[this.listSize++] = element
+}
+
+// removing an element
+function remove(element) {
+  const index = this.find(element)
+
+  if (index > -1) {
+    this.dataStore.splice(index, 1)
+    --this.listSize
+
+    return true
   }
 
-  // removing an element
-  remove(element) {
-    const index = this.find(element)
+  return false
+}
 
-    if (index > -1) {
-      this.dataStore.splice(index, 1)
-      --this.listSize
+// determining number of elements
+function length() {
+  return this.listSize
+}
 
+// retrieve/view list's elements
+function toString() {
+  return this.dataStore
+}
+
+// insert an element
+function insert(element, after) {
+  const index = this.find(after)
+
+  if (index > -1) {
+    this.dataStore.splice(index + 1, 0, element)
+    ++this.listSize
+
+    return true
+  }
+
+  return false
+}
+
+// remove all elements
+function clear() {
+  this.dataStore = []
+  this.listSize = 0
+  this.pos = 0
+}
+
+// determining if a given value is in the list
+function contains(element) {
+  for (let i = 0; i < this.dataStore.length; ++i) {
+    if (this.dataStore[i] == element) {
       return true
     }
-
-    return false
   }
 
-  // determining number of elements
-  length() {
-    return this.listSize
+  return false
+}
+
+// trasversing
+function front() {
+  this.pos = 0
+}
+
+function end() {
+  this.pos = this.listSize - 1
+}
+
+function prev() {
+  if (this.pos > 0) {
+    --this.pos
   }
+}
 
-  // retrieve/view list's elements
-  toString() {
-    return this.dataStore
+function next() {
+  if (this.pos < this.listSize - 1) {
+    ++this.pos
   }
+}
 
-  // insert an element
-  insert(element, after) {
-    const index = this.find(after)
+function currPos() {
+  return this.pos
+}
 
-    if (index > -1) {
-      this.dataStore.splice(index + 1, 0, element)
-      ++this.listSize
+function moveTo(position) {
+  this.pos = position
+}
 
-      return true
-    }
+function getElement() {
+  return this.dataStore[this.pos]
+}
 
-    return false
-  }
-
-  // remove all elements
-  clear() {
-    this.dataStore = []
-    this.listSize = 0
-    this.pos = 0
-  }
-
-  // determining if a given value is in the list
-  contains(element) {
-    for (let i = 0; i < this.dataStore.length; ++i) {
-      if (this.dataStore[i] == element) {
-        return true
-      }
-    }
-
-    return false
-  }
-
-  // trasversing
-  front() {
-    this.pos = 0
-  }
-
-  end() {
-    this.pos = this.listSize - 1
-  }
-
-  prev() {
-    if (this.pos > 0) {
-      --this.pos
-    }
-  }
-
-  next() {
-    if (this.pos < this.listSize - 1) {
-      ++this.pos
-    }
-  }
-
-  currPos() {
-    return this.pos
-  }
-
-  moveTo(position) {
-    this.pos = position
-  }
-
-  getElement() {
-    return this.dataStore[this.pos]
-  }
+// class Customer {
+//  constructor(name, movie) {
+//    this.name = name
+//    this.movie = movie
+//  }
+//}
+/*function Customer(name, movie) {
+  this.name = name
+  this.movie = movie
 }
 
 try {
@@ -119,8 +143,6 @@ try {
     const data = fs.readFileSync(`./${file}`, 'utf8')
 
     const arr = data.split('\n')
-
-    console.log(data)
 
     for (let i = 0; i < arr.length; ++i) {
       arr[i] = arr[i].trim()
@@ -132,18 +154,12 @@ try {
   // Using List to manage a Kiosk
   function displayList(list) {
     for (list.front(); list.currPos() < list.length(); list.next()) {
-      if (list.getElement() instanceof Customer) {
-        console.log(`${list.getElement()["name"]}, ${list.getElement()["movie"]}`)
-      } else {
-        console.log(list.getElement())
-      }
-    }
-  }
-
-  class Customer {
-    constructor(name, movie) {
-      this.name = name
-      this.movie = movie
+      // if (list.getElement() instanceof Customer) {
+      // console.log(`${list.getElement()["name"]}, ${list.getElement()["movie"]}`)
+      // console.log(list.getElement()['name'] + ', ' + list.getElement()['movie'])
+      // } else {
+      console.log(list.getElement())
+      // }
     }
   }
 
@@ -161,10 +177,12 @@ try {
 
   let movies = createArr('films.txt')
 
+  console.log(movies)
+
   const movieList = new List()
   const customers = new List()
 
-  for (let i = 0; i > movies.length; ++i) {
+  for (let i = 0; i < movies.length; ++i) {
     movieList.append(movies[i])
   }
 
@@ -179,5 +197,19 @@ try {
   displayList(customers)
 } catch (err) {
   console.log('Error reading file', err)
+} */
+
+const names = new List()
+
+names.append('Clayton')
+names.append('Raymond')
+names.append('Cynthia')
+names.append('Jennifer')
+names.append('Bryan')
+names.append('Danny')
+
+for (let i = 0; i > names.length(); i++) {
+  const element = names.dataStore[i]
+  console.log(element)
 }
 
