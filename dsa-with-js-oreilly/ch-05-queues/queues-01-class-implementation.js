@@ -1,4 +1,4 @@
-class Queue {
+module.exports = class Queue {
   constructor() {
     this.queue = []
   }
@@ -24,17 +24,21 @@ class Queue {
   }
 
   back() {
-    return this.queue[this.size - 1]
+    return this.queue[this.size() - 1]
   }
 
   toString() {
     let str = ''
 
     for (let i = 0; i < this.queue.length; i++) {
-      str = str + `${this.queue.[i]} \n`
+      str = str + `${this.queue[i]} \n`
     }
 
     return str
+  }
+
+  isEmpty() {
+    return this.queue.length === 0
   }
 
   size() {
