@@ -8,7 +8,7 @@ module.exports = class PriorityQueue {
   }
 
   dequeue() {
-    const priority = this.queue[0].code;
+    let priority = this.queue[0].code;
 
     for (let i = 1; i < this.queue.length; ++i) {
       if (this.queue[i].code < priority) {
@@ -42,7 +42,7 @@ module.exports = class PriorityQueue {
   toString() {
     let str = ''
 
-    for (let i = 0; i < this.queue.length; i++) {
+    for (let i = 0; i < this.size(); i++) {
       str += `${this.queue[i].name} code: ${this.queue[i].code} \n`
     }
 
