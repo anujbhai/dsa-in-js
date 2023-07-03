@@ -42,4 +42,3 @@ seen = pq.dequeue()
 console.log(`Patient being treated: ${seen[0].name}`)
 console.log(`Patients waiting to be seen: ${pq.toString()}`)
 
-
