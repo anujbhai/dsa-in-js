@@ -14,10 +14,8 @@ pq.enqueue(p)
 p = new Patient('Jones', 4)
 pq.enqueue(p)
 
-
 p = new Patient('Fahrenbach', 6)
 pq.enqueue(p)
-
 
 p = new Patient('Brown', 4)
 pq.enqueue(p)
@@ -41,5 +39,3 @@ seen = pq.dequeue()
 
 console.log(`Patient being treated: ${seen[0].name}`)
 console.log(`Patients waiting to be seen: ${pq.toString()}`)
-
-
