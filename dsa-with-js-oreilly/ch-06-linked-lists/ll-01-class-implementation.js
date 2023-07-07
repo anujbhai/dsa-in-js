@@ -113,4 +113,3 @@ cities.display()
 cities.remove('Carlisle')
 
 cities.display()
-
