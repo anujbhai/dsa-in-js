@@ -101,16 +101,16 @@ class LinkedList {
   }
 }
 
-const linkedList = new LinkedList()
+const cities = new LinkedList()
 
-linkedList.append(5)
-linkedList.append(10)
-linkedList.append(15)
-linkedList.prepend(2)
-linkedList.remove(5)
+cities.append('Conway')
+cities.append('Russellville')
+cities.append('Carlisle')
+cities.append('Alma')
 
-const previousNode = linkedList.findPrevious(15)
+cities.display()
 
-console.log(`Previous Node: ${previousNode ? previousNode.element : 'not found!'}`)
-linkedList.display()
+cities.remove('Carlisle')
+
+cities.display()
 
