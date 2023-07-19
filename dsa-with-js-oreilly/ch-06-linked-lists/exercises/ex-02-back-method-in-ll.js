@@ -118,5 +118,3 @@ list.show(); // Output: 3
 
 list.back(2);
 list.show(); // Output: 1
-
-
