@@ -5,92 +5,118 @@ class Node {
   }
 }
 
-class LinkedList {
+class SinglyLinkedList {
   constructor() {
     this.head = null;
-    this.current = null; // Track the current node
+    this.current = null;
   }
 
-  isEmpty() {
-    return this.head === null;
-  }
-
-  insert(data) {
+  append(data) {
     const newNode = new Node(data);
-    if (this.isEmpty()) {
+    if (!this.head) {
       this.head = newNode;
-      this.current = newNode; // Set the current node to the newly inserted node
+      this.current = newNode;
     } else {
-      this.current.next = newNode;
-      this.current = newNode; // Update the current node to the newly inserted node
+      let current = this.head;
+      while (current.next) {
+        current = current.next;
+      }
+      current.next = newNode;
+    }
+  }
+
+  prepend(data) {
+    const newNode = new Node(data);
+    if (!this.head) {
+      this.head = newNode;
+      this.current = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+  }
+
+  remove(data) {
+    if (!this.head) {
+      return;
+    }
+    if (this.head.data === data) {
+      this.head = this.head.next;
+      this.current = this.head;
+      return;
+    }
+
+    let current = this.head;
+    let prev = null;
+    while (current) {
+      if (current.data === data) {
+        prev.next = current.next;
+        if (this.current === current) {
+          this.current = prev.next;
+        }
+        return;
+      }
+      prev = current;
+      current = current.next;
     }
   }
 
   advance(n) {
-    let count = 0;
-    while (count < n && this.current !== null) {
-      this.current = this.current.next;
-      count++;
+    if (n <= 0 || !this.current) {
+      return;
     }
+    let steps = n;
+    let current = this.current;
+    while (current && steps > 0) {
+      current = current.next;
+      steps--;
+    }
+    this.current = current;
   }
 
   back(n) {
-    let count = 0;
-    let curr = this.current;
-
-    // Traverse n nodes backward from the current node
-    while (count < n && curr !== null) {
-      curr = this.findPreviousNode(curr);
-      count++;
+    if (n <= 0 || !this.current) {
+      return;
     }
-
-    // Update the current node
-    this.current = curr;
-  }
-
-  findPreviousNode(node) {
+    let steps = n;
     let current = this.head;
-    while (current && current.next !== node) {
+    let prev = null;
+    while (current && steps > 0) {
+      prev = current;
       current = current.next;
+      steps--;
     }
-    return current;
+    this.current = prev;
   }
 
-  toString() {
-    if (this.isEmpty()) {
-      return "LinkedList: Empty";
+  show() {
+    if (this.current) {
+      console.log(this.current.data);
     } else {
-      let result = "LinkedList: ";
-      let current = this.head;
-      while (current !== null) {
-        result += current.data + " -> ";
-        current = current.next;
-      }
-      result += "null";
-      return result;
+      console.log("No current node selected.");
     }
   }
 }
 
-// Example usage
-const linkedList = new LinkedList();
+const list = new SinglyLinkedList();
 
-linkedList.insert(1);
-linkedList.insert(2);
-linkedList.insert(3);
-linkedList.insert(4);
+list.append(1);
+list.append(2);
+list.append(3);
+list.append(4);
 
-console.log("Initial List:");
-console.log(linkedList.toString());
+list.show(); // Output: 1
 
-linkedList.advance(2); // Move current node 2 nodes forward
+list.advance(2);
+list.show(); // Output: 3
 
-console.log("After advancing 2 nodes:");
-console.log(linkedList.toString());
+list.prepend(0);
+list.show(); // Output: 0
 
-linkedList.back(1); // Move current node 1 node backward
+list.remove(2);
+list.show(); // Output: 3
 
-console.log("After moving 1 node backward:");
-console.log(linkedList.toString());
+list.back(2);
+list.show(); // Output: 1
 
 
