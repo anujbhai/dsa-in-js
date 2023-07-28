@@ -1,4 +1,4 @@
-class Dictionary {
+module.exports = class Dictionary {
   constructor() {
     this.map = new Map()
   }
@@ -15,22 +15,23 @@ class Dictionary {
     this.map.delete(key)
   }
 
+  size() {
+    return this.map.size
+  }
+
+  clear() {
+    this.map.clear()
+  }
+
   showAll() {
-    for (const [key, value] of this.map.entries()) {
+    const sorted = Array.from(this.map.entries()).sort((a, b) => {
+      // ascending order
+      return a[0] < b[0] ? -1 : 1
+    })
+
+    for (const [key, value] of sorted) {
       console.log(`${key}: ${value}`)
     }
   }
 }
-
-const phonebook = new Dictionary()
-
-phonebook.add('Mike', '123')
-phonebook.add('David', '345')
-phonebook.add('Cynthia', '456')
-
-console.log(`David's extension: ${phonebook.get('David')}`)
-
-phonebook.remove('David')
-
-phonebook.showAll()
 
