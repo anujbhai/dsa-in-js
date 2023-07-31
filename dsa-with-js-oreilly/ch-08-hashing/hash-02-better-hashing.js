@@ -5,15 +5,20 @@ class HashTable {
 
   // simple hash function
   hash(key) {
+    const H = 137
     let hash = 0
 
     for (let i = 0; i < key.length; i++) {
-      hash += key.charCodeAt(i)
+      hash += H * hash + key.charCodeAt(i)
     }
 
-    console.log(`Hash value: ${key} -> ${hash}`)
+    hash = hash % this.table.length
 
-    return hash % this.table.length
+    if (hash < 0) {
+      hash += this.table.length - 1
+    }
+
+    return parseInt(hash)
   }
 
   put(data) {
@@ -50,4 +55,5 @@ for (let i = 0; i < names.length; i++) {
 }
 
 hTable.showDistro()
+
 
