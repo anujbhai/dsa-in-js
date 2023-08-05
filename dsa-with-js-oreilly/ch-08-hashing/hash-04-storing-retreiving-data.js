@@ -26,7 +26,7 @@ class HashTable {
 
   put(key, data) {
     const pos = this.hash(data)
-    this.table[pos] = { key, data }
+    this.table[pos] = data
   }
 
   get(key) {
@@ -34,11 +34,11 @@ class HashTable {
   }
 
   showDistro() {
-    // let n = 0
+    let n = 0
 
     for (let i = 0; i < this.table.length; i++) {
       if (this.table[i] !== undefined) {
-        console.log(`${i}: Key: ${this.table[i].key}, Data: ${this.table[i].data}`)
+        console.log(i + ": " + this.table[i])
       }
     }
   }
@@ -92,4 +92,6 @@ async function main() {
 }
 
 main()
+
+
 
