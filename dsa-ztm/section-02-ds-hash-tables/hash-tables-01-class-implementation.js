@@ -45,6 +45,23 @@ class HashTable {
 
   // iterate through all items
   keys() {
+    if (!this.data.length) {
+      return undefined
+    }
+
+    const keysArr = []
+
+    for (let i = 0; i < this.data.length; i++) {
+      // if not an empty memory cell
+      if (this.data[i] && this.data[i].length) {
+        // loop through all potential collisions
+        if (this.data.length < 1) {
+          for (let j = 0; j < this.data[i].length; j++) {
+            keysArr.push(this.data[i][j][0])
+          }
+        } else {
+          keysArr.push(this.data[i][0])
+        }
     const keysArr = []
 
     for (let i = 0; i < this.data.length; i++) {
