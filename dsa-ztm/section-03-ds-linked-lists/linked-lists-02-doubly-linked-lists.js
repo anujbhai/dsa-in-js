@@ -2,14 +2,16 @@ class Node {
   constructor(value) {
     this.value = value
     this.next = null
+    this.prev = null
   }
 }
 
-class LinkedList {
+class DoublyLinkedList {
   constructor(value) {
     this.head = {
       value: value,
       next: null,
+      prev: null,
     }
     this.tail = this.head
     this.length = 1
@@ -18,6 +20,7 @@ class LinkedList {
   append(value) {
     const newNode = new Node(value)
 
+    newNode.prev = this.tail
     this.tail.next = newNode
     this.tail = newNode
     this.length++
@@ -29,6 +32,7 @@ class LinkedList {
     const newNode = new Node(value)
 
     newNode.next = this.head
+    this.head.prev = newNode
     this.head = newNode
     this.length++
 
@@ -43,10 +47,12 @@ class LinkedList {
 
     const newNode = new Node(val)
     const leader = this.traverseToIndex(i - 1)
-    const holdingPointer = leader.next
+    const follower = leader.next
 
     leader.next = newNode
-    newNode.next = holdingPointer
+    newNode.prev = leader
+    newNode.next = follower
+    follower.prev = newNode
 
     this.length++
 
@@ -86,20 +92,16 @@ class LinkedList {
       currentNode = currentNode.next
     }
 
-    console.log(elements.join(' --> '))
+    console.log(elements.join(' <--> '))
   }
 }
 
-const lList = new LinkedList(10)
+const dll = new DoublyLinkedList(10)
 
-lList.append(5)
-lList.append(16)
-lList.prepend(1)
-lList.insert(2, 99)
-lList.insert(200, 88)
+dll.append(5)
+dll.append(16)
+dll.prepend(1)
+dll.insert(1, 99)
 
-lList.display()
-
-lList.remove(2)
-
+dll.display()
 
