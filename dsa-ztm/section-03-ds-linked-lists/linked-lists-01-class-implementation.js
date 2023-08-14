@@ -50,7 +50,7 @@ class LinkedList {
 
     this.length++
 
-    return this.display()
+    // return this.display()
   }
 
   remove(i) {
@@ -59,6 +59,30 @@ class LinkedList {
 
     leader.next = nodeToRemove.next
     this.length--
+
+    // return this.display()
+  }
+
+  reverse() {
+    if (!this.head.next) {
+      return this.head
+    }
+
+    let first = this.head
+    this.tail = this.head
+
+    let second = first.next
+
+    while (second) {
+      const temp = second.next
+
+      second.next = first
+      first = second
+      second = temp
+    }
+
+    this.head.next = null
+    this.head = first
 
     return this.display()
   }
@@ -98,8 +122,10 @@ lList.prepend(1)
 lList.insert(2, 99)
 lList.insert(200, 88)
 
-lList.display()
+// lList.display()
 
 lList.remove(2)
+
+lList.reverse()
 
 
