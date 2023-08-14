@@ -87,6 +87,16 @@ class LinkedList {
     return this.display()
   }
 
+  remove(i) {
+    const leader = this.traverseToIndex(i - 1)
+    const nodeToRemove = leader.next
+
+    leader.next = nodeToRemove.next
+    this.length--
+
+    return this.display()
+  }
+
   traverseToIndex(i) {
     // check params
     let counter = 0
