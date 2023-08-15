@@ -87,16 +87,6 @@ class LinkedList {
     return this.display()
   }
 
-  remove(i) {
-    const leader = this.traverseToIndex(i - 1)
-    const nodeToRemove = leader.next
-
-    leader.next = nodeToRemove.next
-    this.length--
-
-    return this.display()
-  }
-
   traverseToIndex(i) {
     // check params
     let counter = 0
@@ -137,7 +127,3 @@ lList.insert(200, 88)
 lList.remove(2)
 
 lList.reverse()
-
-lList.remove(2)
-
-
