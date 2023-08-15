@@ -163,4 +163,3 @@ function traverse(node) {
 
   return traverseTree
 }
-
