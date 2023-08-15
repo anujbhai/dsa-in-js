@@ -127,5 +127,3 @@ lList.insert(200, 88)
 lList.remove(2)
 
 lList.reverse()
-
-
