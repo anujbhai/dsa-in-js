@@ -144,6 +144,12 @@ class BinarySearchTree {
 
 const tree = new BinarySearchTree()
 
+/* tree.insert(Math.floor(Math.random() * 100) + 1)
+tree.insert(Math.floor(Math.random() * 100) + 1)
+tree.insert(Math.floor(Math.random() * 100) + 1)
+tree.insert(Math.floor(Math.random() * 100) + 1)
+tree.insert(Math.floor(Math.random() * 100) + 1)
+tree.insert(Math.floor(Math.random() * 100) + 1) */
 tree.insert(9)
 tree.insert(4)
 tree.insert(6)
