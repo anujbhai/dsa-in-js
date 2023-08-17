@@ -87,6 +87,40 @@ class LinkedList {
     return this.display()
   }
 
+  remove(i) {
+    const leader = this.traverseToIndex(i - 1)
+    const nodeToRemove = leader.next
+
+    leader.next = nodeToRemove.next
+    this.length--
+
+    // return this.display()
+  }
+
+  reverse() {
+    if (!this.head.next) {
+      return this.head
+    }
+
+    let first = this.head
+    this.tail = this.head
+
+    let second = first.next
+
+    while (second) {
+      const temp = second.next
+
+      second.next = first
+      first = second
+      second = temp
+    }
+
+    this.head.next = null
+    this.head = first
+
+    return this.display()
+  }
+
   traverseToIndex(i) {
     // check params
     let counter = 0

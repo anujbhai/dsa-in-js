@@ -62,11 +62,6 @@ class HashTable {
         } else {
           keysArr.push(this.data[i][0])
         }
-    const keysArr = []
-
-    for (let i = 0; i < this.data.length; i++) {
-      if (this.data[i]) {
-        keysArr.push(this.data[i][0][0])
       }
     }
 
@@ -83,4 +78,3 @@ hTable.set('apples', 52)
 hTable.set('oranges', 2)
 hTable.get('apples')
 hTable.keys()
-
